@@ -117,7 +117,7 @@ namespace Red.JwtSessions
             return $"Bearer {token}";
         }
 
-        internal class JwtSession
+        private class JwtSession
         {
             public TSession Data;
         }
