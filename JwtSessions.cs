@@ -32,53 +32,37 @@ namespace Red.JwtSessions
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every websocket request
         /// </summary>
-        public async Task Process(Request req, WebSocketDialog wsd, Response res)
-        {
-            string token = null;
-            string auth = req.Headers["Authorization"];
-
-            if (string.IsNullOrEmpty(auth))
-            {
-                return;
-            }
-
-            if (auth.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
-            {
-                token = auth.Substring("Bearer ".Length).Trim();
-            }
-            
-            if (string.IsNullOrEmpty(token) || !TryAuthenticateToken(token, out var session))
-            {
-                return;
-            }
-            
-            req.SetData(session.Data);
-        }
+        public Task Process(Request req, WebSocketDialog wsd, Response res) => ProcessInternal(req, res);
 
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every request
         /// </summary>
-        public async Task Process(Request req, Response res)
+        public Task Process(Request req, Response res) => ProcessInternal(req, res);
+
+        private Task ProcessInternal(Request req, Response res)
         {
-            string token = null;
-            string auth = req.Headers["Authorization"];
+            return Task.Run(() =>
+            {
+                string token = null;
+                string auth = req.Headers["Authorization"];
 
-            if (string.IsNullOrEmpty(auth))
-            {
-                return;
-            }
+                if (string.IsNullOrEmpty(auth))
+                {
+                    return;
+                }
 
-            if (auth.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
-            {
-                token = auth.Substring("Bearer ".Length).Trim();
-            }
-          
-            if (string.IsNullOrEmpty(token) || !TryAuthenticateToken(token, out var session))
-            {
-                return;
-            }
-            
-            req.SetData(session.Data);
+                if (auth.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+                {
+                    token = auth.Substring("Bearer ".Length).Trim();
+                }
+
+                if (string.IsNullOrEmpty(token) || !TryAuthenticateToken(token, out var session))
+                {
+                    return;
+                }
+
+                req.SetData(session.Data);
+            });
         }
         
         private bool TryAuthenticateToken(string authorization, out JwtSession data)
