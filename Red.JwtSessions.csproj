@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0</Version>
+    <Version>2.1.0</Version>
     <Authors>Malte Rosenbjerg</Authors>
     <Copyright>Copyright © Rosenbjerg 2018</Copyright>
-    <PackageLicenseUrl>https://github.com/rosenbjerg/Red.CookieSessions/blob/master/LICENSE.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/rosenbjerg/Red.CookieSessions</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/rosenbjerg/Red.JwtSessions/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/rosenbjerg/Red.JwtSessions</PackageProjectUrl>
     <PackageIconUrl>https://rosenbjerg.dk/red/logo.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/rosenbjerg/Red.CookieSessions</RepositoryUrl>
+    <RepositoryUrl>https://github.com/rosenbjerg/Red.JwtSessions</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>red redhttpserver jwt session rhttpserver</PackageTags>
     <PackageReleaseNotes>Change to NET Standard</PackageReleaseNotes>
