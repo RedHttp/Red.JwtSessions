@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <Authors>Malte Rosenbjerg</Authors>
     <Copyright>Copyright © Rosenbjerg 2018</Copyright>
     <PackageLicenseUrl>https://github.com/rosenbjerg/Red.JwtSessions/blob/master/LICENSE.md</PackageLicenseUrl>
@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/rosenbjerg/Red.JwtSessions</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>red redhttpserver jwt session rhttpserver</PackageTags>
-    <PackageReleaseNotes>Change to NET Standard</PackageReleaseNotes>
+    <PackageReleaseNotes>Minor fix</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>

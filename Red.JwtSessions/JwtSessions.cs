@@ -10,7 +10,7 @@ namespace Red.JwtSessions
     public class JwtSessions<TSession> : IRedMiddleware, IRedWebSocketMiddleware
     {
         /// <summary>
-        /// Constructor for JwtSessions Middleware
+        ///     Constructor for JwtSessions Middleware
         /// </summary>
         /// <param name="settings">Settings object</param>
         public JwtSessions(JwtSessionSettings settings)
@@ -56,12 +56,10 @@ namespace Red.JwtSessions
                     token = auth.Substring("Bearer ".Length).Trim();
                 }
 
-                if (string.IsNullOrEmpty(token) || !TryAuthenticateToken(token, out var session))
+                if (!string.IsNullOrEmpty(token) && TryAuthenticateToken(token, out var session))
                 {
-                    return;
+                    req.SetData(session.Data);
                 }
-
-                req.SetData(session.Data);
             });
         }
         
@@ -71,18 +69,13 @@ namespace Red.JwtSessions
             {
                 var json = new JwtBuilder()
                     .WithSecret(_settings.Secret)
-                    .WithAlgorithm(_settings.Algoritm)
+                    .WithAlgorithm(_settings.Algorithm)
                     .MustVerifySignature()
                     .Decode(authorization);
                 data = JsonConvert.DeserializeObject<JwtSession>(json);
                 return true;
             }
-            catch (SignatureVerificationException)
-            {
-                data = null;
-                return false;
-            }
-            catch (JsonSerializationException e)
+            catch (Exception)
             {
                 data = null;
                 return false;
@@ -93,9 +86,9 @@ namespace Red.JwtSessions
         {
             var token = new JwtBuilder()
                 .WithSecret(_settings.Secret)
-                .WithAlgorithm(_settings.Algoritm)
+                .WithAlgorithm(_settings.Algorithm)
                 .AddClaim("exp", DateTimeOffset.UtcNow.Add(_settings.SessionLength).ToUnixTimeSeconds())
-                .AddClaim("data", sessionData)
+                .AddClaim("data", sessionData )
                 .Build();
             
             return $"Bearer {token}";

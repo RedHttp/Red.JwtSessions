@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red.JwtSessions", "Red.JwtSessions.csproj", "{264C8727-0D78-4F74-9795-64CBD9CBBBB9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red.JwtSessions", "Red.JwtSessions/Red.JwtSessions.csproj", "{264C8727-0D78-4F74-9795-64CBD9CBBBB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{480F9CD5-C28B-43CF-9A83-1AF8ED7E651C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +14,9 @@ Global
 		{264C8727-0D78-4F74-9795-64CBD9CBBBB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{264C8727-0D78-4F74-9795-64CBD9CBBBB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{264C8727-0D78-4F74-9795-64CBD9CBBBB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{480F9CD5-C28B-43CF-9A83-1AF8ED7E651C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{480F9CD5-C28B-43CF-9A83-1AF8ED7E651C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{480F9CD5-C28B-43CF-9A83-1AF8ED7E651C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{480F9CD5-C28B-43CF-9A83-1AF8ED7E651C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

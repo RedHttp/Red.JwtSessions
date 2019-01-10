@@ -6,9 +6,9 @@ namespace Red.JwtSessions
     public class JwtSessionSettings
     {
         /// <summary>
-        /// Algorithm used by Jwt-library. Defaults to HMAC-SHA256-A1
+        ///     Algorithm used by Jwt-library. Defaults to HMAC-SHA256-A1
         /// </summary>
-        public IJwtAlgorithm Algoritm { get; set; } = new HMACSHA256Algorithm();
+        public IJwtAlgorithm Algorithm { get; set; } = new HMACSHA256Algorithm();
         
         public TimeSpan SessionLength { get; }
         public string Secret { get; }
