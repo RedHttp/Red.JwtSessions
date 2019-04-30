@@ -3,18 +3,20 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>2.1.1</Version>
     <Authors>Malte Rosenbjerg</Authors>
-    <Copyright>Copyright © Rosenbjerg 2018</Copyright>
+    <Copyright>Copyright © Rosenbjerg 2019</Copyright>
     <PackageLicenseUrl>https://github.com/rosenbjerg/Red.JwtSessions/blob/master/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/rosenbjerg/Red.JwtSessions</PackageProjectUrl>
     <PackageIconUrl>https://rosenbjerg.dk/red/logo.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/rosenbjerg/Red.JwtSessions</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>red redhttpserver jwt session rhttpserver</PackageTags>
-    <PackageReleaseNotes>Minor fix</PackageReleaseNotes>
+    <PackageReleaseNotes>Changed API to be consistent to Red v4</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageVersion>3.0.0</PackageVersion>
+    <Title>Red.JwtSessions</Title>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="JWT" Version="4.0.0" />
-    <PackageReference Include="RHttpServer" Version="3.5.2" />
+    <PackageReference Include="RHttpServer" Version="4.0.0" />
   </ItemGroup>
 </Project>

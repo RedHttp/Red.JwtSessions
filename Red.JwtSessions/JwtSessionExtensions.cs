@@ -9,11 +9,11 @@ namespace Red.JwtSessions
         /// </summary>
         /// <param name="response"></param>
         /// <param name="sessionData"></param>
-        public static async Task SendJwtToken<TSession>(this Response response, TSession sessionData)
+        public static Task<HandlerType> SendJwtToken<TSession>(this Response response, TSession sessionData)
         {
-            var manager = response.ServerPlugins.Get<JwtSessions<TSession>>();
+            var manager = response.Context.Plugins.Get<JwtSessions<TSession>>();
             var auth = manager.NewSession(sessionData);
-            await response.SendJson(new JwtContainer { JWT = auth });
+            return response.SendJson(new JwtContainer { JWT = auth });
         }
 
         /// <summary>

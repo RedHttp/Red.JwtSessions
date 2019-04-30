@@ -13,12 +13,14 @@ namespace Test
     
     class Program
     {
-        private static async Task Auth(Request req, Response res)
+        private static async Task<HandlerType> Auth(Request req, Response res)
         {
             if (req.GetJwtData<Session>() == null)
             {
                 await res.SendStatus(HttpStatusCode.Unauthorized);
+                return HandlerType.Final;
             }
+            return HandlerType.Continue;
         }
         
         static async Task Main(string[] args)
@@ -32,15 +34,12 @@ namespace Test
                 UserId = Guid.NewGuid()
             };
             
-            server.Get("/login", async (req, res) =>
-            {
-                await res.SendJwtToken(data);
-            });
+            server.Get("/login", (req, res) => res.SendJwtToken(data));
             
-            server.Get("/test", Auth, async (req, res) =>
+            server.Get("/test", Auth, (req, res) =>
             {
                 var sessionData = req.GetJwtData<Session>();
-                await res.SendString("Hi " + data.UserId);
+                return res.SendString("Hi " + sessionData.UserId);
             });
 
             await server.RunAsync();

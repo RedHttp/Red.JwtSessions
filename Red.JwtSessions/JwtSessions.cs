@@ -26,20 +26,20 @@ namespace Red.JwtSessions
         /// </summary>
         public void Initialize(RedHttpServer server)
         {
-            server.Plugins.Register(this);
+            server.Plugins.Register<JwtSessions<TSession>, JwtSessions<TSession>>(this);
         }
 
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every websocket request
         /// </summary>
-        public Task Process(Request req, WebSocketDialog wsd, Response res) => ProcessInternal(req, res);
+        public Task<HandlerType> Invoke(Request req, WebSocketDialog wsd, Response res) => InvokeInternal(req, res);
 
         /// <summary>
         ///     Do not invoke. Is invoked by the server with every request
         /// </summary>
-        public Task Process(Request req, Response res) => ProcessInternal(req, res);
+        public Task<HandlerType> Invoke(Request req, Response res) => InvokeInternal(req, res);
 
-        private Task ProcessInternal(Request req, Response res)
+        private Task<HandlerType> InvokeInternal(Request req, Response res)
         {
             return Task.Run(() =>
             {
@@ -48,7 +48,7 @@ namespace Red.JwtSessions
 
                 if (string.IsNullOrEmpty(auth))
                 {
-                    return;
+                    return HandlerType.Continue;
                 }
 
                 if (auth.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
@@ -60,6 +60,8 @@ namespace Red.JwtSessions
                 {
                     req.SetData(session.Data);
                 }
+
+                return HandlerType.Continue;
             });
         }
         
