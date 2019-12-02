@@ -12,32 +12,39 @@ After installing and referencing this library, the `Red.Response` has the extens
 
 ### Example
 ```csharp
-class MySession 
+class Session
 {
-    public string Username;
+    public Guid UserId;
 }
 ...
-server.Use(new JwtSessions<MySession>(new JwtSessionSettings(TimeSpan.FromDays(1), "my secret secret")
+private static async Task<HandlerType> Auth(Request req, Response res)
 {
-    ShouldAuthenticate = path => path != "/login" // We allow people to send requests without a valid Authorization to /login, where we can authenticate them
-}));
-
-server.Get("/login", async (req, res) =>
-{
-    var form = await res.GetFormDataAsync();
-    if (ValidForm(form) && Authenticate(form["username"], form["password"]))
+    if (req.GetJwtData<Session>() == null)
     {
-        await res.SendJwtToken(new MySession {Username = "benny"});
+        await res.SendStatus(HttpStatusCode.Unauthorized);
+        return HandlerType.Final;
     }
-    else 
-        await res.SendStatus(HttpStatusCode.BadRequest);
-});
+    return HandlerType.Continue;
+}
 
-// Only authenticated users are allowed to /friends
-server.Get("/friends", async (req, res) => 
+static async Task Main(string[] args)
 {
-    var session = req.GetData<MySession>();
-    var friends = database.GetFriendsOfUser(session.Username);
-    await res.SendJson(friends);
-});
+    var server = new RedHttpServer();
+    server.Use(new JwtSessions<Session>(new JwtSessionSettings(TimeSpan.FromDays(5), "djklhfbaksdjhfajsdhfasdfhjadsb")));
+
+    var data = new Session
+    {
+        UserId = Guid.NewGuid()
+    };
+
+    server.Get("/login", (req, res) => res.SendJwtToken(data));
+
+    server.Get("/test", Auth, (req, res) =>
+    {
+        var sessionData = req.GetJwtData<Session>();
+        return res.SendString("Hi " + sessionData.UserId);
+    });
+
+    await server.RunAsync();
+}
 ```
