@@ -17,6 +17,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="JWT" Version="4.0.0" />
-    <PackageReference Include="RHttpServer" Version="4.0.0" />
+    <PackageReference Include="RHttpServer" Version="5.2.0" />
   </ItemGroup>
 </Project>
