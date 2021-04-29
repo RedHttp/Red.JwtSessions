@@ -1,0 +1,18 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: JWT
+    versions:
+    - 7.3.1
+    - 8.0.0
+    - 8.1.0
+    - 8.1.2
+    - 8.1.3
+    - 8.1.4
+    - 8.1.5
+    - 8.1.6
