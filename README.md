@@ -1,3 +1,5 @@
+## The RedHttp project is no longer maintained. See [Carter](https://github.com/CarterCommunity/Carter) for a similar low-ceremony experience.
+
 # Jwt Sessions for RedHttpServer
 ### Simple session management middleware for Red using [JWT.Net](https://github.com/jwt-dotnet/jwt)
 [![GitHub](https://img.shields.io/github/license/redhttp/red.jwtsessions)](https://github.com/RedHttp/Red.JwtSessions/blob/master/LICENSE.md)
